@@ -4,4 +4,4 @@ excerpt:
 ---
 ## Recent
 ## Recent
-[Towards-a-new-Ethereum](Towards-a-new-Ethereum.md)
+[Towards a new Ethereum](Towards-a-new-Ethereum)
