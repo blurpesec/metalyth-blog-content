@@ -1,5 +1,5 @@
 ---
-title: Jan_1_2025 - Towards a new Ethereum
+title: Towards a new Ethereum
 excerpt: 
 tags:
   - ethereum
