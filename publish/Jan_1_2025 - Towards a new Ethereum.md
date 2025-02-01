@@ -1,4 +1,8 @@
- ##### Thoughts
+---
+title: Jan_1_2025 - Towards a new Ethereum
+excerpt:
+---
+ #### Thoughts
  - Ethereum needs a stable token to act as a reliable medium of exchange that isn't reliant on backing of a variably-priced digital asset, while also not being tied to existing power structures and fiat currencies assets. 
 	 - This would be necessary for the payments use case for cryptocurrencies, and payments are a clear potential winner use case (i.e - see the success of Tron allowing for USD-based payments in Asia)
  - Funding: Ethereum needs a funding mechanism for research.
