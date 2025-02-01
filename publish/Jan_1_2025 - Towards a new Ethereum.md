@@ -1,6 +1,11 @@
 ---
 title: Jan_1_2025 - Towards a new Ethereum
-excerpt:
+excerpt: 
+tags:
+  - ethereum
+  - ecosystem
+  - governance
+  - stabletoken
 ---
  #### Thoughts
  - Ethereum needs a stable token to act as a reliable medium of exchange that isn't reliant on backing of a variably-priced digital asset, while also not being tied to existing power structures and fiat currencies assets. 
