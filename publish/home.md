@@ -3,5 +3,4 @@ title: Thoughts of an Ethereum ecosystem dev
 excerpt:
 ---
 ## Recent
-## Recent
-[Towards a new Ethereum](towards-a-new-ethereum.md)
+[towards-a-new-ethereum](towards-a-new-ethereum.md)
