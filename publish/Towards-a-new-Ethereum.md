@@ -1,6 +1,6 @@
 ---
 title: Towards a new Ethereum
-excerpt: 
+excerpt: An outline of a path forward for the Ethereum ecosystem towards it's more-decentralized future.
 tags:
   - ethereum
   - ecosystem
