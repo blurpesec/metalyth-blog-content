@@ -6,6 +6,7 @@ tags:
   - ecosystem
   - governance
   - stabletoken
+date: February 1st, 2025
 ---
  #### Thoughts
  - Ethereum needs a stable token to act as a reliable medium of exchange that isn't reliant on backing of a variably-priced digital asset, while also not being tied to existing power structures and fiat currencies assets. 
