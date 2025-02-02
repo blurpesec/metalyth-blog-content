@@ -1,6 +1,6 @@
 name: Publish Markdown Files
 env:
-  BLOG_REPO: matthewwong525/linked-blog-starter
+  BLOG_REPO: blurpesec/blog
   PUBLISH_DIR: publish
 on:
   workflow_dispatch:
