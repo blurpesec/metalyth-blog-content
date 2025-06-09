@@ -203,7 +203,6 @@ In designing an on-chain marketplace for _Eve Frontier_, two dominant approaches
 - **AMMs**, while gas-efficient and offering always-on liquidity, struggle with indivisible assets and low-liquidity environments. Their use may be limited to commodity-style goods in high-traffic trade hubs where price smoothing and approximate quantity resolution are acceptable.
     
 - A **hybrid model** may ultimately be the most robust solution: order books by default, with AMMs selectively enabled for high-liquidity assets and locations.
-    
 
 At a strategic level, these on-chain designs unlock a transformative capability for _Eve Frontier_: **global demand transparency** and **decentralized trade coordination**. This not only empowers players as economic actors but also supports emergent gameplay through arbitrage, logistics, and industrial specialization - all rooted in a universally accessible and verifiable economic layer.
 
@@ -214,28 +213,30 @@ At a strategic level, these on-chain designs unlock a transformative capability 
 	- Build a working MVP of the order-book DEX in the current smart assembly system.
     - Measure gas costs, latency, and order update frequency under real gameplay conditions.
 
-2. **Design AMM Logic for Indivisible Assets**
-
-    - Explore step-function pricing models.
-    - Simulate pricing behavior across small pool sizes to validate player perception.
-
-3. **Implement Hybrid Inventory Routing**
-
-    - Extend SSU logic to support asset-specific routing to either AMM or order book systems based on liquidity or asset type.
-
-4. **Test UX Impact**
+2. **Test UX Impact**
 
     - Conduct UX trials for both systems with real players.
     - Focus on expectation mismatches in AMM-based trade execution for items like ships.
 
-5. **Publish Sample Code & Schema**
-    
+3. **Publish Sample Code & Schema**
+
     - Share base smart contract logic (e.g., MUD tables, order struct formats) for community iteration.
-    - Open a reference indexer design for off-chain order discovery.
-    
-6. **Solicit Community Feedback**
-    
+    - Open a reference indexer design for off-chain order discovery. Or use the on-chain storage for order indexation (store formatted)
+
+4. **Solicit Community Feedback**
+
     - Open up a discussion thread with other players/devs to identify friction points or new gameplay opportunities.
+
+5. **Implement Hybrid Inventory Routing**
+
+    - Extend SSU logic to support asset-specific routing to either AMM or order book systems based on liquidity or asset type.
+
+6. **Design AMM Logic for Indivisible Assets**
+
+    - Explore step-function pricing models.
+    - Simulate pricing behavior across a small number of pools to validate player perception.
+    - Solicit feedback
+
 
 # 7. Further Reading
 
