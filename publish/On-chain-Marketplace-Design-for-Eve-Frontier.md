@@ -53,6 +53,8 @@ For players to interact with trade offers, they must be able to _find_ them. Dis
 
 ### **2.3. Design Constraints in Games**
 
+^ed5b20
+
 In traditional games, trade actions are instant. The act of listing, browsing, or buying an item takes milliseconds. On-chain actions introduce latency: transaction signing, propagation, and confirmation introduce delays of up to several seconds. This latency must be masked or compensated for through clever UX patterns, such as signed intents executed in batch by game servers (so-called "meta-transactions").
 
 Additionally, interactions can fail because transactions are executed in sequence - if another user's transaction is processed just before the current user receives an update, it can invalidate their action after it is originated.
@@ -66,7 +68,7 @@ At its core, the architecture consists of:
 
 - **Order Creation:** Traders submit limit orders to a smart contract by calling a function on an `Orderbook` contract. Each order must include the location of the assets (smart object id), the item id, the price, order type (buy/sell limit/market), the quantity to buy/sell, and the character id of the order owner.
 
-- **Order Storage:** Orders are recorded in a structured on-chain data store (in Eve Frontier's current iteration - it would be a [MUD Table](https://mud.dev/introduction)). Orders should be sorted by price to keep gas fees minimized (more computation causes higher [gas fees](#^cd1163)).
+- **Order Storage:** Orders are recorded in a structured on-chain data store (in Eve Frontier's current iteration - it would be a [MUD Table](https://mud.dev/introduction)). Orders should be sorted by price to keep gas fees minimized (more computation causes higher [gas fees](#^c4d164).
 
 - **Matching Engine:** Order matching can happen fully on-chain via a matching algorithm baked into the contract. Orders are stored pre-sorted to reduce computational complexity.
 
@@ -109,7 +111,7 @@ Instead of matching buyers and sellers directly, AMMs use a **pricing formula**.
 
 AMMs have become popular in blockchain ecosystems because:
 
-- **They offer a smoother user experience** - especially for transaction execution. This is critical in blockchains, where front-running is a common issue due to [latency of blockchain networks](#^4905ff).
+- **They offer a smoother user experience** - especially for transaction execution. This is critical in blockchains, where front-running is a common issue due to [latency of blockchain networks](#^ed5b20).
 - **They are gas-efficient** - meaning they typically have lower transaction fees compared to traditional on-chain order book systems.
 
 ### **4.2. Workflow**
@@ -188,7 +190,7 @@ In EveFrontier - due to the indivisibility of assets Orderbook-based DEXs likely
 
 Due to the indivisibility of assets, AMM-based DEXes will likely only be appropriate in scenarios of high liquidity (the scenario of millions of units of a specific asset - where traders might care less about instability of purchase quantity and care more about success rate of trade execution). Even in this scenario, the UX issues will be difficult to overcome - and they may never be overcome for the purposes of using AMMs to trade low-liquidity assets like ships.
 
-### **5.3. Hybrid Options
+### **5.3. Hybrid Options**
 
 The eventual ideal approach might be one where a marketplace functions in a hybrid system -using an order book-based DEX by default for trade execution, but specific assets (i.e. ones that have high liquidity in a region and are in a trade hub) might be configured to use an AMM-exchange mechanism. 
 
@@ -238,9 +240,12 @@ At a strategic level, these on-chain designs unlock a transformative capability 
     - Solicit feedback
 
 
-# 7. Further Reading
+# 7. Concept Gallery
 
-##### Gas Fees
+#### Gas Fees
+
+^c4d164
+
 Gas Fees are transaction fees paid by a transaction submitter - a representation of transaction complexity. They are broken into two different components:
 - Gas Limit - The maximum amount of computational complexity (a measure of the reading/writing/executing that occurs within a transaction). _think of this like the amount of gasoline you need to make your car travel x miles_
 - Gas Price - The price per unit gas consumed for the gas limit. _think of this like the cost of gasoline per liter/gallon_
