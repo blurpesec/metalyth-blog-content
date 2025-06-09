@@ -1,5 +1,5 @@
 ---
-title: On-chain Market Structures
+title: "Eve Frontier: On-chain Marketplace Design"
 excerpt: Outlining the structure of on-chain marketplaces
 tags:
   - ecosystem
