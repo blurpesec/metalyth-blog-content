@@ -68,7 +68,7 @@ At its core, the architecture consists of:
 
 - **Order Creation:** Traders submit limit orders to a smart contract by calling a function on an `Orderbook` contract. Each order must include the location of the assets (smart object id), the item id, the price, order type (buy/sell limit/market), the quantity to buy/sell, and the character id of the order owner.
 
-- **Order Storage:** Orders are recorded in a structured on-chain data store (in Eve Frontier's current iteration - it would be a [MUD Table](https://mud.dev/introduction)). Orders should be sorted by price to keep gas fees minimized (more computation causes higher gas fees.
+- **Order Storage:** Orders are recorded in a structured on-chain data store (in Eve Frontier's current iteration - it would be a [MUD Table](https://mud.dev/introduction)). Orders should be sorted by price to keep gas fees minimized (more computation causes higher [gas fees](#^c4d164).
 
 - **Matching Engine:** Order matching can happen fully on-chain via a matching algorithm baked into the contract. Orders are stored pre-sorted to reduce computational complexity.
 
@@ -111,7 +111,7 @@ Instead of matching buyers and sellers directly, AMMs use a **pricing formula**.
 
 AMMs have become popular in blockchain ecosystems because:
 
-- **They offer a smoother user experience** - especially for transaction execution. This is critical in blockchains, where front-running is a common issue due to latency of blockchain networks.
+- **They offer a smoother user experience** - especially for transaction execution. This is critical in blockchains, where front-running is a common issue due to [latency of blockchain networks](#^ed5b20).
 - **They are gas-efficient** - meaning they typically have lower transaction fees compared to traditional on-chain order book systems.
 
 ### **4.2. Workflow**
@@ -242,7 +242,9 @@ At a strategic level, these on-chain designs unlock a transformative capability 
 
 # 7. Concept Gallery
 
-#### Gas Fees 
+#### Gas Fees
+
+^c4d164
 
 Gas Fees are transaction fees paid by a transaction submitter - a representation of transaction complexity. They are broken into two different components:
 - Gas Limit - The maximum amount of computational complexity (a measure of the reading/writing/executing that occurs within a transaction). _think of this like the amount of gasoline you need to make your car travel x miles_
