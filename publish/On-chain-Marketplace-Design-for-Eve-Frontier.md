@@ -53,8 +53,6 @@ For players to interact with trade offers, they must be able to _find_ them. Dis
 
 ### **2.3. Design Constraints in Games**
 
-^ed5b20
-
 In traditional games, trade actions are instant. The act of listing, browsing, or buying an item takes milliseconds. On-chain actions introduce latency: transaction signing, propagation, and confirmation introduce delays of up to several seconds. This latency must be masked or compensated for through clever UX patterns, such as signed intents executed in batch by game servers (so-called "meta-transactions").
 
 Additionally, interactions can fail because transactions are executed in sequence - if another user's transaction is processed just before the current user receives an update, it can invalidate their action after it is originated.

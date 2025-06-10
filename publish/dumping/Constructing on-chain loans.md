@@ -1,12 +1,13 @@
 ---
-title: "Eve Frontier: On-chain Marketplace Design"
-excerpt: Outlining the structure of on-chain marketplaces
+title: "Eve Frontier: On-chain loan contract designs"
+excerpt: Outlining a structure of on-chain loans
 tags:
   - ecosystem
   - eve
   - onchain-markets
   - economics
-  - decentralized-exchanges
+  - credit
+  - loans
 date: June 9th, 2025
 ---
 # 1. Introduction
