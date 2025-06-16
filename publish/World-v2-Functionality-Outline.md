@@ -17,28 +17,28 @@ In EVE Frontier, various smart assemblies have inventories. Inventories are brok
 ## Ownership
 
 Ownership in World v2 is controlled by the [`Ownership` System](https://github.com/projectawakening/world-chain-contracts/blob/14128cda741a9f1711087a04461a15c94a35058b/mud-contracts/world-v2/src/namespaces/evefrontier/systems/ownership/OwnershipSystem.sol)
-#### Characters
+### Characters
 
 You can check which on-chain account owns which smart character using the [`CharactersByAccount` Table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e746965720000004368617261637465727342794163636f&query=SELECT%2520%2522account%2522%252C%2520%2522smartObjectId%2522%2520FROM%2520%2522evefrontier__CharactersByAcco%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100)
 
-#### Smart Assemblies
+### Smart Assemblies
 
 You can check which character (`smartObjectId`) owns which smart assembly using the [`OwnershipByObject` table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e746965720000004f776e65727368697042794f626a6563&query=SELECT%2520%2522smartObjectId%2522%252C%2520%2522account%2522%2520FROM%2520%2522evefrontier__OwnershipByObjec%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100)
 
-#### Inventory
+### Inventory
 
 Smart assembly inventories are broken up into two types of inventories - "primary" and "ephemeral".
 
-##### Primary Inventory
+#### Primary Inventory
 
 The "primary" inventory is the share of inventory that a smart assembly has natively assigned to it that is accessible only by the `owner` of the smart assembly and the specific Systems that the owner has delegated access for that smart assembly to.
 
-##### Ephemeral Inventory
+#### Ephemeral Inventory
 
 The "ephemeral" inventory is the share of inventory within a smart assembly that belongs to a player. By default, the *ephemeral inventory* is not accessible to the owner of a smart assembly - but the players can choose to make interactions with the assembly's systems that transfer items out of their ephemeral inventory (perhaps in exchange for currency or other items).
 
 ## Functionality
-#### Smart Assemblies
+### Smart Assemblies
 You can check what type an assembly is by it's `smartObjectId` using the [`SmartAssembly` table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e74696572000000536d617274417373656d626c79000000&query=SELECT%2520%2522smartObjectId%2522%252C%2520%2522assemblyType%2522%2520FROM%2520%2522evefrontier__SmartAssembly%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100). This can be configured only by CCP.
 
 ## Terminology
@@ -88,7 +88,7 @@ An example of this would be: In an item-trading exchange - when a user makes an 
 
 _MUD Systems_ are the logic that are able to interact with _Tables_
 
-### Smart Assembly
+### Smart Assemblies
 
 A smart assembly is a deployed structure within Eve Frontier. This covers things like SSUs, Smart Gates, Smart Turrets, etc.
 #### Identities
