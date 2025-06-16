@@ -1,6 +1,6 @@
 ---
 title: "Eve Frontier: World v2 Functionality Outline"
-excerpt: Outlining the structure of on-chain marketplaces
+excerpt: An overview of how Eve Frontier World v2 works
 tags:
   - ecosystem
   - eve-frontier
@@ -77,6 +77,7 @@ In the MUD framework created by Lattice, _Tables_ are stores of data following f
 On-chain tables are the default table implementation. They persist all data written and updated in a MUD table to the network that the MUD world exists on.
 
 ##### Off-chain
+
 Off-chain tables are a different table implementation that doesn't persist the data on-chain, but instead takes advantage of the EVM network's event logs tooling to persist records for off-chain indexing (including in SQL-queryable formats). The benefits of this are to reduce gas fees for data not explicitly needed by the state for contract functionality. Since emitted logs are not stored in blockchain state on nodes - the cost of servicing logs is cheaper for node operators, so they have a lower transaction fee impact for users than publishing all data on-chain in state.
 
 These Off-chain tables are by-default handled by the [MUD Indexer](https://mud.dev/indexer) to make it easier to query.
