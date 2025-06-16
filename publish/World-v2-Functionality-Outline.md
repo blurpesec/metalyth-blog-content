@@ -8,12 +8,6 @@ tags:
 date: June 16th, 2025
 author: Hecate
 ---
-# World v2
-
-## Inventory
-
-In EVE Frontier, various smart assemblies have inventories. Inventories are broken up into two types, primary inventories and ephemeral inventories. Ephemeral inventories are subsets of the overall inventory of an assembly which is owned by a specific character (referred to as `characterId` in the codebase).
-
 ## Ownership
 
 Ownership in World v2 is controlled by the [`Ownership` System](https://github.com/projectawakening/world-chain-contracts/blob/14128cda741a9f1711087a04461a15c94a35058b/mud-contracts/world-v2/src/namespaces/evefrontier/systems/ownership/OwnershipSystem.sol)
@@ -25,15 +19,15 @@ You can check which on-chain account owns which smart character using the [`Char
 
 You can check which character (`smartObjectId`) owns which smart assembly using the [`OwnershipByObject` table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e746965720000004f776e65727368697042794f626a6563&query=SELECT%2520%2522smartObjectId%2522%252C%2520%2522account%2522%2520FROM%2520%2522evefrontier__OwnershipByObjec%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100)
 
-### Inventory
+## Inventory
 
-Smart assembly inventories are broken up into two types of inventories - "primary" and "ephemeral".
+In EVE Frontier, various smart assemblies have inventories. Smart assembly inventories are broken up into two types: "_primary_" and "_ephemeral_".
 
-#### Primary Inventory
+### Primary Inventory
 
 The "primary" inventory is the share of inventory that a smart assembly has natively assigned to it that is accessible only by the `owner` of the smart assembly and the specific Systems that the owner has delegated access for that smart assembly to.
 
-#### Ephemeral Inventory
+### Ephemeral Inventory
 
 The "ephemeral" inventory is the share of inventory within a smart assembly that belongs to a player. By default, the *ephemeral inventory* is not accessible to the owner of a smart assembly - but the players can choose to make interactions with the assembly's systems that transfer items out of their ephemeral inventory (perhaps in exchange for currency or other items).
 
@@ -43,7 +37,7 @@ You can check what type an assembly is by it's `smartObjectId` using the [`Smart
 
 ## Terminology
 
-### EVM (**Ethereum Virtual Machine**)
+### EVM
 
 The **Ethereum Virtual Machine (EVM)** is the runtime environment where all Ethereum smart contracts run.
 
