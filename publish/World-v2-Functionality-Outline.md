@@ -8,7 +8,7 @@ tags:
 date: June 16th, 2025
 author: Hecate
 ---
-## Ownership
+## Smart Object Metadata
 
 Ownership in World v2 is controlled by the [`Ownership` System](https://github.com/projectawakening/world-chain-contracts/blob/14128cda741a9f1711087a04461a15c94a35058b/mud-contracts/world-v2/src/namespaces/evefrontier/systems/ownership/OwnershipSystem.sol)
 ### Characters
@@ -19,21 +19,28 @@ You can check which on-chain account owns which smart character using the [`Char
 
 You can check which character (`smartObjectId`) owns which smart assembly using the [`OwnershipByObject` table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e746965720000004f776e65727368697042794f626a6563&query=SELECT%2520%2522smartObjectId%2522%252C%2520%2522account%2522%2520FROM%2520%2522evefrontier__OwnershipByObjec%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100)
 
-## Inventory
+### Smart Assemblies
+You can check what type an assembly is by it's `smartObjectId` using the [`SmartAssembly` table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e74696572000000536d617274417373656d626c79000000&query=SELECT%2520%2522smartObjectId%2522%252C%2520%2522assemblyType%2522%2520FROM%2520%2522evefrontier__SmartAssembly%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100). This can be configured only by CCP.
+
+## Functionality
+
+### Inventory
 
 In EVE Frontier, various smart assemblies have inventories. Smart assembly inventories are broken up into two types: "_primary_" and "_ephemeral_".
 
-### Primary Inventory
+#### Primary Inventory
 
 The "primary" inventory is the share of inventory that a smart assembly has natively assigned to it that is accessible only by the `owner` of the smart assembly and the specific Systems that the owner has delegated access for that smart assembly to.
 
-### Ephemeral Inventory
+##### Access Control
+_...coming soon_
+
+#### Ephemeral Inventory
 
 The "ephemeral" inventory is the share of inventory within a smart assembly that belongs to a player. By default, the *ephemeral inventory* is not accessible to the owner of a smart assembly - but the players can choose to make interactions with the assembly's systems that transfer items out of their ephemeral inventory (perhaps in exchange for currency or other items).
 
-## Functionality
-### Smart Assemblies
-You can check what type an assembly is by it's `smartObjectId` using the [`SmartAssembly` table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e74696572000000536d617274417373656d626c79000000&query=SELECT%2520%2522smartObjectId%2522%252C%2520%2522assemblyType%2522%2520FROM%2520%2522evefrontier__SmartAssembly%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100). This can be configured only by CCP.
+##### Access Control
+_...coming soon_
 
 ## Terminology
 
@@ -65,7 +72,7 @@ The MUD world is the overarching name that describes the set of systems and tabl
 
 #### Tables
 
-In the MUD framework created by Lattice, _Tables_ are stores of data following formalized data schema. They come in two types:
+In the MUD framework created by Lattice, _Tables_ are data stores following formalized data schema. They come in two types:
 ##### On-chain
 
 On-chain tables are the default table implementation. They persist all data written and updated in a MUD table to the network that the MUD world exists on.
@@ -76,7 +83,12 @@ Off-chain tables are a different table implementation that doesn't persist the d
 
 These Off-chain tables are by-default handled by the [MUD Indexer](https://mud.dev/indexer) to make it easier to query.
 
-An example of this would be: In an item-trading exchange - when a user makes an interaction to buy something - the actual state needs access to pieces of data like "item id", "quantity", "price", and "location" to conduct the trade. These would all exist in **On-chain** tables. Types of data that would exist in **Off-chain** tables would be "order receipts" or "list of items for sale at location _X_". The off-chain data would still be useful for improving the user experience of a trading interface - but isn't explicitly needed to conduct trades.
+##### Use-cases
+
+**An example of where to use each**:
+In an item exchange - when a user makes an interaction to buy something - the actual state needs access to pieces of data like "item id", "quantity", "price", and "location" to conduct the trade. These would all exist in **On-chain** tables.
+
+Types of data that would exist in **Off-chain** tables would be "order receipts" or "list of items for sale at location _X_" or "list of active trading locations". The off-chain data would still be useful for improving the user experience of a trading interface - but isn't explicitly needed to conduct trades.
 
 #### Systems
 
@@ -91,7 +103,7 @@ In EveFrontier - an **"account"** refers to a **public-private key pair**, usual
 
 In the context of **decentralized public key infrastructure** (such as blockchains), **"ownership"** can be thought of like having the **keys to a lockbox** - only the holder of the private key can access or control the associated assets or identities.
 ##### `smartObjectId`
-The on-chain identity of a deployed (or previously-deployed) smart assembly or other type of on-chain object (like player-characters)
+The on-chain identity of a deployed (or previously-deployed) smart assembly or other type of on-chain objects (like player-characters).
 
 
 
