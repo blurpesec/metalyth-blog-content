@@ -1,7 +1,9 @@
 name: Update Submodules in Another Repo
 
 on:
-  workflow_dispatch:  # Manual trigger; change to cron or push if needed
+  workflow_dispatch:
+  push:
+    branches: [main]
 
 jobs:
   update-submodules:
