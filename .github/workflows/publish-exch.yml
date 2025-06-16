@@ -26,7 +26,12 @@ jobs:
 
       - name: Update submodules to latest remote commits
         run: |
-          git submodule update --remote --rebase
+          git submodule foreach '
+            git fetch origin
+            branch=$(git rev-parse --abbrev-ref HEAD)
+            git checkout origin/$branch
+            git reset --hard
+          '
 
       - name: Commit and push if changes exist
         run: |
