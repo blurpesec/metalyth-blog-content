@@ -15,12 +15,25 @@ Ownership in World v2 is controlled by the [`Ownership` System](https://github.c
 
 You can check which on-chain account owns which smart character using the [`CharactersByAccount` Table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e746965720000004368617261637465727342794163636f&query=SELECT%2520%2522account%2522%252C%2520%2522smartObjectId%2522%2520FROM%2520%2522evefrontier__CharactersByAcco%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100)
 
+
+```solidity
+uint256 playerSmartObjectId = 3194756474794722629244700896512708477207675911069851860519200573108333740971;
+address playerAccount = CharactersByAccount.get(playerSmartObjectId);
+```
+
+And since character's are smart objects owned by player accounts you can use the function listed below to do the reverse: 
+`uint256 smartObjectId => address playerAccount`
 ### Smart Assemblies
 
 You can check which character (`smartObjectId`) owns which smart assembly using the [`OwnershipByObject` table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e746965720000004f776e65727368697042794f626a6563&query=SELECT%2520%2522smartObjectId%2522%252C%2520%2522account%2522%2520FROM%2520%2522evefrontier__OwnershipByObjec%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100)
 
+```solidity
+uint256 smartObjectId = 3194756474794722629244700896512708477207675911069851860519200573108333740971;
+address playerAccount = OwnershipByObject.get(smartObjectId);
+```
+
 ### Smart Assemblies
-You can check what type an assembly is by it's `smartObjectId` using the [`SmartAssembly` table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e74696572000000536d617274417373656d626c79000000&query=SELECT%2520%2522smartObjectId%2522%252C%2520%2522assemblyType%2522%2520FROM%2520%2522evefrontier__SmartAssembly%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100). This can be configured only by CCP.
+You can check what type an assembly is by it's `smartObjectId` using the [`SmartAssembly` table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e74696572000000536d617274417373656d626c79000000&query=SELECT%2520%2522smartObjectId%2522%252C%2520%2522assemblyType%2522%2520FROM%2520%2522evefrontier__SmartAssembly%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100).
 
 ## Functionality
 
@@ -49,7 +62,7 @@ transferItems[0] = InventoryItemParams({
 	quantity: uint256(quantityToTransfer)
 });
 
-// transfer - function in InventoryInteractSystem
+// transfer - function in EphemeralInteractSystem
 transferToInventory(senderSmartObjectId, recipientSmartObjectId, transferItems);
 ```
 
