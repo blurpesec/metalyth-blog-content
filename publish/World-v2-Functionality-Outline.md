@@ -10,15 +10,15 @@ author: Hecate
 ---
 ## Smart Object Metadata
 
-Ownership in World v2 is controlled by the [`Ownership` System](https://github.com/projectawakening/world-chain-contracts/blob/14128cda741a9f1711087a04461a15c94a35058b/mud-contracts/world-v2/src/namespaces/evefrontier/systems/ownership/OwnershipSystem.sol)
+Ownership in World v2 is controlled by the [`OwnershipSystem`](https://github.com/projectawakening/world-chain-contracts/blob/14128cda741a9f1711087a04461a15c94a35058b/mud-contracts/world-v2/src/namespaces/evefrontier/systems/ownership/OwnershipSystem.sol) and [`AccessSystem`](https://github.com/projectawakening/world-chain-contracts/blob/14128cda741a9f1711087a04461a15c94a35058b/mud-contracts/world-v2/src/namespaces/evefrontier/systems/access-system/AccessSystem.sol)
 ### Characters
 
 You can check which on-chain account owns which smart character using the [`CharactersByAccount` Table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e746965720000004368617261637465727342794163636f&query=SELECT%2520%2522account%2522%252C%2520%2522smartObjectId%2522%2520FROM%2520%2522evefrontier__CharactersByAcco%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100)
 
 
 ```solidity
-uint256 playerSmartObjectId = 3194756474794722629244700896512708477207675911069851860519200573108333740971;
-address playerAccount = CharactersByAccount.get(playerSmartObjectId);
+address playerAccount = 0x1234567812345678123456781234567812345678;
+uint256 smartObjectId = CharactersByAccount.get(playerAccount);
 ```
 
 And since character's are smart objects owned by player accounts you can use the function listed below to do the reverse: 
