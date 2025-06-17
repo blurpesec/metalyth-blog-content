@@ -32,12 +32,94 @@ In EVE Frontier, various smart assemblies have inventories. Smart assembly inven
 
 The "primary" inventory is the share of inventory that a smart assembly has natively assigned to it that is accessible only by the `owner` of the smart assembly and the specific Systems that the owner has delegated access for that smart assembly to.
 
+##### `transferToInventory`
+
+Transfers from one smart object's primary inventory to another smart object's primary inventory.
+
+```solidity
+// instantiate transfers array
+InventoryItemParams[] memory transferItems = new InventoryItemParams[](1);
+
+uint256 senderSmartObjectId = 123...456;
+uint256 recipientSmartObjectId = 456...789;
+
+// define transfer(s)
+transferItems[0] = InventoryItemParams({
+	smartObjectId: uint256(itemId),
+	quantity: uint256(quantityToTransfer)
+});
+
+// transfer - function in InventoryInteractSystem
+transferToInventory(senderSmartObjectId, recipientSmartObjectId, transferItems);
+```
+
+
 ##### Access Control
 _...coming soon_
 
 #### Ephemeral Inventory
 
 The "ephemeral" inventory is the share of inventory within a smart assembly that belongs to a player. By default, the *ephemeral inventory* is not accessible to the owner of a smart assembly - but the players can choose to make interactions with the assembly's systems that transfer items out of their ephemeral inventory (perhaps in exchange for currency or other items).
+
+##### `transferFromEphemeral`
+
+Transfers from ephemeral inventory of one player to smart object's primary inventory.
+
+```solidity
+// instantiate transfers array
+InventoryItemParams[] memory transferItems = new InventoryItemParams[](1);
+
+address senderOfItems = _msgSender()
+
+// define transfer(s)
+transferItems[0] = InventoryItemParams({
+	smartObjectId: uint256(itemId),
+	quantity: uint256(quantityToTransfer)
+});
+
+// transfer - function in EphemeralInteractSystem
+transferFromEphemeral(smartObjectId, senderOfItems, transferItems);
+```
+
+##### `transferToEphemeral`
+
+Transfers from smart object's primary inventory to player's ephemeral inventory.
+
+```solidity
+// instantiate transfers array
+InventoryItemParams[] memory transferItems = new InventoryItemParams[](1);
+
+address recipientOfItems = _msgSender()
+
+// define transfer(s)
+transferItems[0] = InventoryItemParams({
+	smartObjectId: uint256(itemId),
+	quantity: uint256(quantityToTransfer)
+});
+
+// transfer - function in EphemeralInteractSystem
+transferToEphemeral(smartObjectId, recipientOfItems, transferItems);
+```
+##### `crossTransferToEphemeral`
+
+Transfers from ephemeral inventory of one player to ephemeral inventory of another player.
+
+```solidity
+// instantiate transfers array
+InventoryItemParams[] memory transferItems = new InventoryItemParams[](1);
+
+address senderOfItems = _msgSender()
+address recipientOfItems address(0x0000000000000000000000000000000000000000)
+
+// define transfer(s)
+transferItems[0] = InventoryItemParams({
+	smartObjectId: uint256(itemId),
+	quantity: uint256(quantityToTransfer)
+});
+
+// transfer - function in EphemeralInteractSystem
+crossTransferToEphemeral(smartObjectId, senderOfItems, recipientOfItems, transferItems);
+```
 
 ##### Access Control
 _...coming soon_
