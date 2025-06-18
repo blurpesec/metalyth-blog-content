@@ -1,5 +1,5 @@
 ---
-title: "Eve Frontier: World v2 Functionality Outline"
+title: World v2 Functionality Outline
 excerpt: An overview of how Eve Frontier World v2 works
 tags:
   - ecosystem
