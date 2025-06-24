@@ -7,6 +7,7 @@ tags:
   - development
 date: June 16th, 2025
 author: Hecate
+updated_at: June 24th, 2025
 ---
 ## Smart Object Metadata
 
@@ -79,19 +80,18 @@ The "ephemeral" inventory is the share of inventory within a smart assembly that
 Transfers from ephemeral inventory of one player to smart object's primary inventory.
 
 ```solidity
-// instantiate transfers array
-InventoryItemParams[] memory transferItems = new InventoryItemParams[](1);
-
-address senderOfItems = _msgSender()
-
-// define transfer(s)
-transferItems[0] = InventoryItemParams({
-	smartObjectId: uint256(itemId),
-	quantity: uint256(quantityToTransfer)
-});
-
-// transfer - function in EphemeralInteractSystem
-transferFromEphemeral(smartObjectId, senderOfItems, transferItems);
+func transferItemsFromEphemeral(uint256 smartObjectId, uint256 quantityToTransfer, uint256 itemId) public {
+	address senderOfItems = _msgSender();
+	
+	// instantiate transfers array
+	InventoryItemParams[] memory transferItems = new InventoryItemParams[](1);
+	transferItems[0] = InventoryItemParams({
+		smartObjectId: uint256(itemId),
+		quantity: uint256(quantityToTransfer)
+	});
+	
+	ephemeralInteractSystem.transferFromEphemeral(smartObjectId, senderOfItems, transferItems);
+}
 ```
 
 ##### `transferToEphemeral`
@@ -99,19 +99,20 @@ transferFromEphemeral(smartObjectId, senderOfItems, transferItems);
 Transfers from smart object's primary inventory to player's ephemeral inventory.
 
 ```solidity
-// instantiate transfers array
-InventoryItemParams[] memory transferItems = new InventoryItemParams[](1);
-
-address recipientOfItems = _msgSender()
-
-// define transfer(s)
-transferItems[0] = InventoryItemParams({
-	smartObjectId: uint256(itemId),
-	quantity: uint256(quantityToTransfer)
-});
-
-// transfer - function in EphemeralInteractSystem
-transferToEphemeral(smartObjectId, recipientOfItems, transferItems);
+func transferToEphemeral(uint256 smartObjectId, uint256 quantityToTransfer, uint256 itemId) public {
+	// instantiate transfers array
+	InventoryItemParams[] memory transferItems = new InventoryItemParams[](1);
+	
+	address recipientOfItems = _msgSender()
+	
+	// define transfer(s)
+	transferItems[0] = InventoryItemParams({
+		smartObjectId: uint256(itemId),
+		quantity: uint256(quantityToTransfer)
+	});
+	
+	ephemeralInteractSystem.transferToEphemeral(smartObjectId, recipientOfItems, transferItems);
+}
 ```
 ##### `crossTransferToEphemeral`
 
