@@ -56,7 +56,7 @@ BucketMetadat: {
 ### String Utils
 
 To control sizing in tables - use utils for capping strings at 31 bytes.
-(_Note: this is still WIP - so don't copy-paste)
+(_Note: this is still WIP - so don't copy-paste_)
 
 ```solidity
 
@@ -135,8 +135,8 @@ The system will create a wrapper around each function that contains the bucket i
 As well as creating a new cross-bucket transfer function
 `aasInternalTransfer`
 
-#### Examples
-##### ``aasDeposit``
+#### Functions
+##### `aasDeposit`
 A current implementation using `transferFromEphemeral` looks like this:
 
 ```solidity
@@ -300,7 +300,7 @@ func aasExternalTransfer(
 }
 ```
 
-#### `aasInternalTransfer`
+##### `aasInternalTransfer`
 This one will be created from scratch. It doesn't actually "transfer" any items - just changes which `bucketId` "owns" the `itemId` of `quantityToTransfer`.
 
 ```solidity
@@ -339,7 +339,9 @@ func aasExternalTransfer(
  - `bucket_deposit` - Allows users to deposit to a bucket. `tier: 0`.
  - `bucket_withdraw` - Allows users to withdraw from a bucket. `tier: 1`.
  - `bucket_assign` - Allows users to assign permission tiers to others for a bucket. `tier: 2`
- 
+#### Locking down owner's access to primary inventory.
+
+We'll probably need to talk to CCP about how to fully lock-away a storage unit's owner's ability to t
 #### Sane Defaults
 If the user doesn't pre-configure access-control for the bucket they're depositing into for the first time, it should auto-configure a self-owned bucket where no-one else can access. If the user is attempting to deposit into a bucket that already exists, there should be a "write" permission that they are required to have before they can write. If they attempt to write to it - it should fail. We can use this `write` param to dictate what users see when they navigate to the dapp.
 ## Additional Use-cases
@@ -349,3 +351,7 @@ If the user doesn't pre-configure access-control for the bucket they're depositi
 - Marketplaces
 - Direct transfers between players
 
+## Other Considerations
+
+- We may want to expose a method that allows to calculate the smart object owner's "owned amount" of an asset - so we can use that to help provide UIs for object owners (or even better - just stop depositing owner items by-default into "primary" inventory)
+- We need a way to create "trustless" systems.
