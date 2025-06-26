@@ -11,11 +11,11 @@ tags:
   - allocation-system
 date: June 20th, 2025
 author: Hecate
-updated_at: June 24th, 2025
+updated_at: June 26th, 2025
 ---
 # Problem Statement
 
-When assets are deposited into a storage unit they immediately go to ephemeral storage if they’re a non-owner and to primary inventory if they’re the owner. If non-owners transfer to the primary inventory (maybe as the result of using a "Marketplace" system or a "Tribe Storage" system) - their goods get aggregated together with owner’s goods. You can solve this for a single storage unit system by keeping track of deposited / withdrawn goods with an additional table. This only works as long as that is the only system using it though.
+When assets are deposited into a storage unit they immediately go to ephemeral storage if they’re a non-owner and to primary inventory if the depositor is the owner. If non-owners transfer to the primary inventory (maybe as the result of using a "Marketplace" system or a "Tribe Storage" system) - their goods get aggregated together with owner’s goods. It is possible to solve this for a single storage unit system by keeping track of deposited / withdrawn goods with an additional table - but his only works as long as that is the only system using it.
 
 # Proposal
 
@@ -24,12 +24,11 @@ Create a proxy wrapper around the basic storage unit functions that handles tran
 ## Mechanisms
 ### Tables
 
-In order to provide a wrapper around where assets are "allocated" to buckets - we effectively need a duplicate table that tracks primary inventory (akin to the existing `InventoryItem` table, but with `bucketId`). This will look like this:
+In order to provide a wrapper around where assets are "allocated" to buckets - we effectively need a duplicate table that tracks primary inventory (akin to the existing `InventoryItem` table, but with unique `bucketId` by "deposit target"). This table structure can look like this:
 
 ```solidity
 BucketedInventoryItem: {
   schema: {
-	smartObjectId: "uint256",
 	bucketId: "uint256",
 	itemObjectId: "uint256",
 	exists: "bool",
@@ -37,7 +36,7 @@ BucketedInventoryItem: {
 	index: "uint256",
 	version: "uint256",
   },
-  key: ["smartObjectId", "bucketId", "itemObjectId"],
+  key: ["smartObjectId", "bucketId"],
 },
 ```
 
@@ -56,7 +55,7 @@ BucketMetadat: {
 ### String Utils
 
 To control sizing in tables - use utils for capping strings at 31 bytes.
-(_Note: this is still WIP - so don't copy-paste_)
+(_Note: this is still WIP - DO NOT copy-paste to use_)
 
 ```solidity
 
@@ -330,18 +329,20 @@ func aasExternalTransfer(
 
 ### Access Control
  We'll need to come up with some delegation of the access control system that is extensible enough to allow people to set up their own sub-access control for assets within buckets they control.
-
- #### Permissions
+#### Permissions
  We have some options on approaches to permissions. 
- 
- ##### Tier-based access control
+##### Tier-based access control
  We could do "tier-based" access control in order to maintain simplicity. Basically - each tier of permission will always contain all the perms of a lower tier.
  - `bucket_deposit` - Allows users to deposit to a bucket. `tier: 0`.
  - `bucket_withdraw` - Allows users to withdraw from a bucket. `tier: 1`.
  - `bucket_assign` - Allows users to assign permission tiers to others for a bucket. `tier: 2`
+##### Role-based access control
+_coming soon..._
+##### Attribute-based access control
+_coming soon..._
 #### Locking down owner's access to primary inventory.
 
-We'll probably need to talk to CCP about how to fully lock-away a storage unit's owner's ability to t
+CCP hasn't provided any guidance yet on how to make a storage owned by a system - denying owner the ability to withdraw from the SSU's primary inventory.
 #### Sane Defaults
 If the user doesn't pre-configure access-control for the bucket they're depositing into for the first time, it should auto-configure a self-owned bucket where no-one else can access. If the user is attempting to deposit into a bucket that already exists, there should be a "write" permission that they are required to have before they can write. If they attempt to write to it - it should fail. We can use this `write` param to dictate what users see when they navigate to the dapp.
 ## Additional Use-cases
@@ -351,7 +352,7 @@ If the user doesn't pre-configure access-control for the bucket they're depositi
 - Marketplaces
 - Direct transfers between players
 
-## Other Considerations
+Considerations
 
-- We may want to expose a method that allows to calculate the smart object owner's "owned amount" of an asset - so we can use that to help provide UIs for object owners (or even better - just stop depositing owner items by-default into "primary" inventory)
+- We may want to expose some utility methods that allow for easy calculation of the smart object owner's "owned amount" of an asset - with the intent being we can use that to help provide UIs for object owners (or even better - just stop depositing owner items by-default into the shared primary inventory)
 - We need a way to create "trustless" systems.
