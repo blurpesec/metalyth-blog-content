@@ -15,7 +15,7 @@ updated_at: June 26th, 2025
 ---
 # Problem Statement
 
-When assets are deposited into a storage unit they immediately go to ephemeral storage if they’re a non-owner and to primary inventory if the depositor is the owner. If non-owners transfer to the primary inventory (maybe as the result of using a "Marketplace" system or a "Tribe Storage" system) - their goods get aggregated together with owner’s goods. It is possible to solve this for a single storage unit system by keeping track of deposited / withdrawn goods with an additional table - but his only works as long as that is the only system using it.
+When assets are deposited into a storage unit they immediately go to ephemeral storage if they’re a non-owner and to primary inventory if the depositor is the owner. If non-owners transfer to the primary inventory (maybe as the result of using a "Marketplace" system or a "Tribe Storage" system) - their goods get aggregated together with the both the owner’s and each other's goods. It is possible to solve this for a single storage unit system by keeping track of deposited / withdrawn goods with an additional table - but this only works as long as that is the only system using it.
 
 # Proposal
 
