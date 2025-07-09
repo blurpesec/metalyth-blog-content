@@ -3,8 +3,8 @@ title: Recipe Book
 excerpt: Where to find common data objects and logic in the World Chain Contracts
 tags:
   - ecosystem
-  - eve
   - development
+  - eve-frontier
 date: July 9th, 2025
 create: July 9th, 2025
 update: July 9th, 2025
