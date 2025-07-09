@@ -18,6 +18,9 @@ In the past decade of blockchain history, we’ve witnessed repeated cycles of s
 ### Single-Shard Universe
 ### Player-Driven Economy
 ### Deep Emergence
+
+### Developer Extensibility
+
 ## 2.2. The hidden technical bottlenecks
 ### Trust & Verification Burden (CCP as sole arbiter)
 ### Data Silos & Interoperability Issues
@@ -27,7 +30,6 @@ In the past decade of blockchain history, we’ve witnessed repeated cycles of s
 ## 3.1. Framing: Blockchain as tool, not the point
 ## 3.2. Key technical capabilities enabled
 ### Massively Parallelized State & Verification
-#### Capability: Distributed validation load
 #### Trustless Execution & Verifiable Logic (Smart Contracts)
 #### Capability: Guaranteed code outcomes
 #### Eve Evolution: 

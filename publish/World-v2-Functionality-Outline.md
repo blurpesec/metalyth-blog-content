@@ -34,7 +34,7 @@ address playerAccount = OwnershipByObject.get(smartObjectId);
 ```
 
 ### Smart Assemblies
-You can check what type an assembly is by it's `smartObjectId` using the [`SmartAssembly` table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e74696572000000536d617274417373656d626c79000000&query=SELECT%2520%2522smartObjectId%2522%252C%2520%2522assemblyType%2522%2520FROM%2520%2522evefrontier__SmartAssembly%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100).
+You can check what type an assembly is by it's `smartObjectId` using the [`SmartAssembly` table](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e74696572000000536d617274417373656d626c79000000&query=SELECT%2520%2522smartObjectId%2522%252C%2520%2522assemblyType%2522%2520FROM%2520%2522evefrontier__SmartAssembly%2522%2520LIMIT%2520100%2520OFFSET%25200%253B&page=0&pageSize=100)
 
 ## Functionality
 
@@ -54,8 +54,8 @@ Transfers from one smart object's primary inventory to another smart object's pr
 // instantiate transfers array
 InventoryItemParams[] memory transferItems = new InventoryItemParams[](1);
 
-uint256 senderSmartObjectId = 123...456;
-uint256 recipientSmartObjectId = 456...789;
+uint256 senderSmartObjectId = 1;
+uint256 recipientSmartObjectId = 2;
 
 // define transfer(s)
 transferItems[0] = InventoryItemParams({
