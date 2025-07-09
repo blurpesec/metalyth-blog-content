@@ -1,17 +1,17 @@
 ---
-title: (WIP) Aggregate Allocation System
-excerpt: A proposal for handling multi-system storage units
+title: Storage Manager System
+excerpt: A proposal for handling multi-system storage units by subdividing primary inventory
 tags:
   - ecosystem
   - eve-frontier
   - development
   - proposal
-  - wip
   - storage-abstraction
   - allocation-system
 date: June 20th, 2025
 author: Hecate
-updated_at: June 26th, 2025
+updated_at: July 9th, 2025
+created_at: June 20th, 2025
 ---
 # Problem Statement
 
@@ -127,15 +127,15 @@ Existing mechanisms to write follow the same functionality as listed in the [Wor
 - `crossTransferToEphemeral` - Transfers from ephemeral inventory of one player to ephemeral inventory of another player.
 
 The system will create a wrapper around each function that contains the bucket info it's interacting with.
-- `transferFromEphemeral` =>  `aasDeposit` 
-- `transferToEphemeral` =>  `aasWithdraw` 
-- `transferToInventory` =>  `aasExternalTransfer` 
+- `transferFromEphemeral` =>  `deposit` 
+- `transferToEphemeral` =>  `withdraw` 
+- `transferToInventory` =>  `externalTransfer`  _(Note: Not included in MVP)_
 
 As well as creating a new cross-bucket transfer function
-`aasInternalTransfer`
+`internalTransfer`
 
 #### Functions
-##### `aasDeposit`
+##### `deposit`
 A current implementation using `transferFromEphemeral` looks like this:
 
 ```solidity
@@ -164,7 +164,7 @@ func transferItemsFromEphemeralInventory(
 We'll be extending it to cover the `bucketId` use-case
 
 ```solidity
-func `aasDeposit`(
+func `deposit`(
 	uint256 smartObjectId, 
 	uint256 quantityToTransfer, 
 	uint256 itemId,
@@ -188,7 +188,7 @@ func `aasDeposit`(
 }
 ```
 
-##### `aasWithdraw`
+##### `withdraw`
 A current implementation using `transferToEphemeral` looks like this:
 
 ```solidity
@@ -219,7 +219,7 @@ func transferItemsToEphemeralInventory(
 We'll be extending it to cover the `bucketId` use-case.
 
 ```solidity
-func aasWithdraw(
+func withdraw(
 	uint256 smartObjectId, 
 	uint256 quantityToTransfer, 
 	uint256 itemId, 
@@ -243,7 +243,8 @@ func aasWithdraw(
 }
 ```
 
-##### `aasExternalTransfer`
+##### `externalTransfer`
+_Note: this currently isn't viable since there are some problems with item teleportation in the world-chain-contracts._
 A current implementation using `transferToInventory` looks like this:
 
 ```solidity
@@ -273,7 +274,7 @@ func transferItemsBetweenPrimaryInventories(
 We'll be extending it to cover the `bucketId` use-case.
 
 ```solidity
-func aasExternalTransfer(
+func externalTransfer(
 	uint256 sourceSmartObjectId,
 	uint256 sourceBucketId,
 	uint256 recipientSmartObjectId,
@@ -299,11 +300,11 @@ func aasExternalTransfer(
 }
 ```
 
-##### `aasInternalTransfer`
+##### `internalTransfer`
 This one will be created from scratch. It doesn't actually "transfer" any items - just changes which `bucketId` "owns" the `itemId` of `quantityToTransfer`.
 
 ```solidity
-func aasExternalTransfer(
+func intenralTransfer(
 	uint256 smartObjectId,
 	uint256 sourceBucketId,
 	uint256 recipientBucketId,
@@ -331,28 +332,23 @@ func aasExternalTransfer(
  We'll need to come up with some delegation of the access control system that is extensible enough to allow people to set up their own sub-access control for assets within buckets they control.
 #### Permissions
  We have some options on approaches to permissions. 
-##### Tier-based access control
- We could do "tier-based" access control in order to maintain simplicity. Basically - each tier of permission will always contain all the perms of a lower tier.
- - `bucket_deposit` - Allows users to deposit to a bucket. `tier: 0`.
- - `bucket_withdraw` - Allows users to withdraw from a bucket. `tier: 1`.
- - `bucket_assign` - Allows users to assign permission tiers to others for a bucket. `tier: 2`
-##### Role-based access control
-_coming soon..._
-##### Attribute-based access control
-_coming soon..._
+##### Delegated Access Control
+
+In order to provide an extensible access control system, the Storage Manager System implements a replacement of the access control by way of proxying the access control exposed for the primary inventory in the Eve Frontier `world-chain-contracts`. The way this works is similar to the way that smart turrets and smart gates work, where there is a default functionality implemented for specific methods (`canJump`, `inProximity`, `aggression`) - and if the owner doesn't specify a system to delegate these calls to - it won't use a delegated method, but rather just fall-back
+
 #### Locking down owner's access to primary inventory.
 
 CCP hasn't provided any guidance yet on how to make a storage owned by a system - denying owner the ability to withdraw from the SSU's primary inventory.
 #### Sane Defaults
-If the user doesn't pre-configure access-control for the bucket they're depositing into for the first time, it should auto-configure a self-owned bucket where no-one else can access. If the user is attempting to deposit into a bucket that already exists, there should be a "write" permission that they are required to have before they can write. If they attempt to write to it - it should fail. We can use this `write` param to dictate what users see when they navigate to the dapp.
-## Additional Use-cases
+If the user doesn't pre-configure access-control for the bucket they're depositing into for the first time, it should auto-configure a self-owned bucket to a shared "Tribe Storage". If the user is attempting to deposit into a bucket that already exists, there should be a `deposit` permission that they are required to have before they can deposit. If they attempt to deposit to it - it should fail. We can use this `deposit` param to dictate what users see when they navigate to the dapp.
+## Use-cases
 
-- File-system-like object organization (would maybe require a sort of "tree" structure for bucket ownership, perhaps, where access controls can be dictated by higher-level bucket's access controls.)
-- Access-controlled corp hangars
-- Marketplaces
-- Direct transfers between players
+- File-system-like object organization (would maybe require a sort of "tree" structure for bucket ownership, perhaps, where access controls can be dictated by higher-level bucket's access controls).
+- Access-controlled corp hangars.
+- Marketplaces.
+- Direct transfers between players.
 
 Considerations
 
-- We may want to expose some utility methods that allow for easy calculation of the smart object owner's "owned amount" of an asset - with the intent being we can use that to help provide UIs for object owners (or even better - just stop depositing owner items by-default into the shared primary inventory)
+- We may want to expose some utility methods that allow for easy calculation of the smart object owner's "owned amount" of an asset - with the intent being we can use that to help provide UIs for object owners (or even better - just stop depositing owner items by-default into the shared primary inventory).
 - We need a way to create "trustless" systems.
