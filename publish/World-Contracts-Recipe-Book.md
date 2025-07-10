@@ -11,7 +11,8 @@ update: July 9th, 2025
 ---
 # Data in tables
 ### Solidity
-To read data from tables within Solidity - import the table from the relevant NPM package exporting the table.
+To read data from tables within Solidity - import the table from the relevant NPM package exporting the table (in non-custom cases, this will be auto-generated into a `@eveworld/world-v2/src/namespaces/evefrontier/codegen/tables/*` table).
+
 Examples:
 ```solidity
 import { Characters } from "@eveworld/world-v2/src/namespaces/evefrontier/codegen/tables/Characters.sol"
@@ -57,3 +58,6 @@ You can check what type a smart assembly is by it's `smartObjectId` using the `S
 - `smart_hangar` - Hangars.
 - `SSU` - Smart Storage Units.
 
+### Smart Assembly Location
+[MUD Explorer](https://explorer.mud.dev/pyrope/worlds/0xcdb380e0cd3949caf70c45c67079f2e27a77fc47/explore?tableId=0x746265766566726f6e746965720000004c6f636174696f6e0000000000000000&query=SELECT+%22smartObjectId%22,+%22solarSystemId%22,+%22x%22,+%22y%22,+%22z%22+FROM+%22evefrontier__Location%22+LIMIT+100+OFFSET+100;&page=1&pageSize=100)
+You can check the location of a smart assembly by it's `smartObjectId` using the `Location` table.
